@@ -10,8 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient<PokeApiService>();
-builder.Services.AddControllers()
-    .AddNewtonsoftJson();
 
 
 
