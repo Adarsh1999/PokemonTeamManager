@@ -1,4 +1,4 @@
-// using PokemonTeamManager.Models;
+using PokemonTeamManager.Models;
 using Microsoft.EntityFrameworkCore;
 using PokemonTeamManager.Services;
 
@@ -10,11 +10,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient<PokeApiService>();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
+
 
 
 // Add DbContext configuration
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
