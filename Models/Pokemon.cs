@@ -1,6 +1,10 @@
-﻿namespace PokemonTeamManager.Models;
-
-public class Pokemon
-{
-    
-}
+﻿// namespace PokemonTeamManager.Models;
+//
+// public class Pokemon
+// {
+//     public int Id { get; set; }
+//     public string? Name { get; set; }
+//     public string? Type { get; set; }
+//     public int? TeamId { get; set; }
+//     public Team? Team { get; set; }
+// }
