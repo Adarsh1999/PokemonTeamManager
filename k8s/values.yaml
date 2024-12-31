@@ -1,0 +1,42 @@
+postgresql:
+  enabled: true
+  image:
+    repository: bitnami/postgresql
+    tag: latest
+  persistence:
+    enabled: true
+    size: 10Gi
+  database: pokemondb
+  username: postgres
+  password: postgres
+  
+api:
+  image:
+    repository: pokemontrainer.azurecr.io/containergroup
+    tag: api
+  replicaCount: 1
+  service:
+    type: LoadBalancer
+    ports:
+      http: 8080
+      https: 5077
+
+migrations:
+  image:
+    repository: pokemontrainer.azurecr.io/containergroup
+    tag: migrations
+
+pgadmin:
+  enabled: true
+  image:
+    repository: dpage/pgadmin4
+    tag: latest
+  persistence:
+    enabled: true
+    size: 1Gi
+  credentials:
+    email: admin@poke.com
+    password: 09Prototype_101
+  service:
+    type: LoadBalancer
+    port: 80
