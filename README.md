@@ -62,8 +62,12 @@ Run the following command to restore all required .NET dependencies:
 ```bash
 dotnet restore
 ```
-
-### 5. Apply Database Migrations
+### 5. If no migrations folder exists, create one
+Run the following command to create a migrations folder:
+```bash
+dotnet ef migrations add InitialCreate
+```
+### 6. Apply Database Migrations
 To set up the database schema, apply the Entity Framework Core migrations:
 ```bash
 dotnet ef database update
