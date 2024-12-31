@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+WORKDIR /app
+
+# Copy everything first
+COPY . ./
+
+# Create a new tool manifest and install EF tools
+RUN dotnet new tool-manifest --force
+RUN dotnet tool install dotnet-ef --version 8.0.0
+RUN dotnet tool restore
+
+# Add environment variable for .NET tools
+ENV PATH="$PATH:/root/.dotnet/tools"
+ENV DOTNET_ROOT=/usr/share/dotnet
+
+# Restore project dependencies
+RUN dotnet restore
+
+# Create tools directory if it doesn't exist
+RUN mkdir -p /root/.dotnet/tools && chmod +x /root/.dotnet/tools
