@@ -13,11 +13,14 @@ spec:
         app: {{ .Release.Name }}-api
     spec:
       initContainers:
+        - name: wait-for-postgresql
+          image: busybox:1.28
+          command: ['sh', '-c', 'until nslookup {{ .Release.Name }}-postgresql; do echo waiting for postgresql; sleep 2; done;']
         - name: migrations
           image: "{{ .Values.migrations.image.repository }}:{{ .Values.migrations.image.tag }}"
           command: ['bash', '-c', 'dotnet tool run dotnet-ef database update']
           env:
-            {{- include "api.env" . | nindent 12 }}
+            {{- include "migrations.env" . | nindent 12 }}
       containers:
         - name: api
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"

@@ -1,0 +1,12 @@
+# templates/pgadmin-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-pgadmin
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pgadmin.persistence.size }}
+  storageClassName: managed-premium

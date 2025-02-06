@@ -6,6 +6,7 @@ postgresql:
   persistence:
     enabled: true
     size: 10Gi
+    storageClass: managed-premium
   database: pokemondb
   username: postgres
   password: postgres
@@ -13,18 +14,29 @@ postgresql:
 api:
   image:
     repository: pokemontrainer.azurecr.io/containergroup
-    tag: api
+    tag: api-amd64
   replicaCount: 1
   service:
     type: LoadBalancer
     ports:
       http: 8080
       https: 5077
+  connectionString:
+    host: "postgresql"  # This will be prefixed with release name
+    database: "pokemondb"
+    username: "postgres"
+    password: "postgres"
 
 migrations:
   image:
     repository: pokemontrainer.azurecr.io/containergroup
-    tag: migrations
+    tag: migrations-amd64
+  # Add the same connection string config for migrations
+  connectionString:
+    host: "postgresql"
+    database: "pokemondb"
+    username: "postgres"
+    password: "postgres"
 
 pgadmin:
   enabled: true
@@ -39,4 +51,4 @@ pgadmin:
     password: 09Prototype_101
   service:
     type: LoadBalancer
-    port: 80
+    port: 5000
