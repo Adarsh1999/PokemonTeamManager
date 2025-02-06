@@ -1,0 +1,5 @@
+apiVersion: v2
+name: pokemon-api
+description: A Helm chart for Pokemon API and related services
+version: 0.1.0
+type: application
